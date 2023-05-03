@@ -27,9 +27,19 @@ const babelLoaderConfiguration = {
     },
   },
 };
+const imageLoaderConfiguration = {
+  test: /\.(jpg|png)$/,
+  use: {
+    loader: 'url-loader',
+    options: {
+      esModule: false,
+      name: '[name].[ext]',
+    },
+  },
+};
 
 module.exports = {
-  entry: path.join(__dirname, 'index.web.js'),
+  entry: ['@babel/polyfill', path.join(__dirname, 'index.web.js')],
   output: {
     path: path.resolve(appDirectory, 'dist'),
     publicPath: '/',
@@ -42,7 +52,7 @@ module.exports = {
     },
   },
   module: {
-    rules: [babelLoaderConfiguration],
+    rules: [babelLoaderConfiguration, imageLoaderConfiguration],
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -1,16 +1,10 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-const App = () => {
-  return (
-    <View style={styles.title}>
-      <Text> React native and Web </Text>
-    </View>
-  );
+// In App.js in a new project
+
+import * as React from 'react';
+import AppRoutes from './routes';
+
+export const App = () => {
+  return <AppRoutes />;
 };
+
 export default App;
-const styles = StyleSheet.create({
-  title: {
-    flex: 1,
-    margin: 100,
-  },
-});
