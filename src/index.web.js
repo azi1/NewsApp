@@ -3,8 +3,8 @@
  */
 
 import {AppRegistry} from 'react-native';
-import App from './src/App';
-import appName from './src/app.json';
+import App from './App';
+import appName from './app.json';
 import iconFont from 'react-native-vector-icons/Fonts/Feather.ttf';
 const iconFontStyles = `@font-face {
   src: url(${iconFont});
