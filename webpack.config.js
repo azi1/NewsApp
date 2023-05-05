@@ -12,8 +12,8 @@ const babelLoaderConfiguration = {
   test: /\\\\.ts$|tsx|js?$/,
   // Add every directory that needs to be compiled by Babel during the build.
   include: [
-    path.resolve(__dirname, 'index.web.js'), // Entry to your application
-    path.resolve(__dirname, 'src/App.tsx'), // Change this to your main App file
+    path.resolve(__dirname, 'src/index.web.js'), // Entry to your application
+    path.resolve(__dirname, 'src/App.tsx'),
     path.resolve(__dirname, 'src'),
     path.resolve(__dirname, 'component'),
     ...compileNodeModules,
@@ -32,6 +32,7 @@ const iconLoaderConfiguration = {
   loader: 'file-loader', // or directly file-loader
   include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
 };
+
 const imageLoaderConfiguration = {
   test: /\.(jpg|png)$/,
   use: {
@@ -44,7 +45,7 @@ const imageLoaderConfiguration = {
 };
 
 module.exports = {
-  entry: ['@babel/polyfill', path.join(__dirname, 'index.web.js')],
+  entry: ['@babel/polyfill', path.join(__dirname, 'src/index.web.js')],
   output: {
     path: path.resolve(appDirectory, 'dist'),
     publicPath: '/',

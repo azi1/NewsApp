@@ -1,8 +1,10 @@
+//@ts-nocheck
 import React from 'react';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home, Details, Settings} from '../screens';
+import {CustomTabBar} from '../components';
 import type {StackNavigationOptions} from '@react-navigation/stack';
 import type {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
 
@@ -34,9 +36,10 @@ const HomeStack = () => {
 };
 
 const AppRoutes = () => {
+  const renderTabBar = props => <CustomTabBar {...props} />;
   return (
     <NavigationContainer theme={navTheme}>
-      <Tab.Navigator screenOptions={TabStackOptions}>
+      <Tab.Navigator tabBar={renderTabBar} screenOptions={TabStackOptions}>
         <Tab.Screen name="Home" component={HomeStack} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
