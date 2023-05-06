@@ -7,9 +7,10 @@ import {Home, Details, Settings} from '../screens';
 import {CustomTabBar} from '../components';
 import type {StackNavigationOptions} from '@react-navigation/stack';
 import type {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
+import {Header} from '../components';
 
 const homStackOptions: StackNavigationOptions = {
-  headerShown: false,
+  headerShown: true,
 };
 
 const TabStackOptions: BottomTabNavigationOptions = {
@@ -27,10 +28,35 @@ const navTheme = {
 };
 
 const HomeStack = () => {
+  const renderHomeScreenHeader = ({options}) => (
+    <Header title={options.headerTitle} />
+  );
+
+  const renderDetailsScreenHeader = ({route, navigation}) => (
+    <Header
+      title={route.name}
+      showBackButton
+      onGoBack={() => navigation.navigate('Home')}
+    />
+  );
+
   return (
     <Stack.Navigator screenOptions={homStackOptions}>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Details" component={Details} />
+      <Stack.Screen
+        name="Home"
+        options={{
+          header: renderHomeScreenHeader,
+          headerTitle: 'Dubbizle News',
+        }}
+        component={Home}
+      />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          header: renderDetailsScreenHeader,
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -39,9 +65,20 @@ const AppRoutes = () => {
   const renderTabBar = props => <CustomTabBar {...props} />;
   return (
     <NavigationContainer theme={navTheme}>
-      <Tab.Navigator tabBar={renderTabBar} screenOptions={TabStackOptions}>
-        <Tab.Screen name="Home" component={HomeStack} />
-        <Tab.Screen name="Settings" component={Settings} />
+      <Tab.Navigator
+        initialRouteName="main"
+        tabBar={renderTabBar}
+        screenOptions={TabStackOptions}>
+        <Tab.Screen
+          options={{tabBarLabel: 'Home'}}
+          name="main"
+          component={HomeStack}
+        />
+        <Tab.Screen
+          options={{tabBarLabel: 'Settings'}}
+          name="settings"
+          component={Settings}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

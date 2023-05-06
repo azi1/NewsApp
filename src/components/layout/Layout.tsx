@@ -8,7 +8,7 @@ type Props = {
 export const Layout = ({children}: Props) => {
   return (
     <NativeBaseProvider>
-      <Box flex={1} safeArea>
+      <Box flex={1} safeAreaBottom safeAreaLeft safeAreaRight>
         {children}
       </Box>
     </NativeBaseProvider>
