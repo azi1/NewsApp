@@ -1,9 +1,10 @@
-//@ts-nocheck
 import {Box, Pressable, useColorModeValue} from 'native-base';
-import React from 'react';
+import React, {FC} from 'react';
 import {Animated} from 'react-native';
+import {CutomTabBarProps} from '../../types/navigation';
 
-export const CustomTabBar = ({state, descriptors, navigation}) => {
+type Props = CutomTabBarProps;
+export const CustomTabBar: FC<Props> = ({state, descriptors, navigation}) => {
   return (
     <Box flexDirection="row">
       {state.routes.map((route, index) => {
@@ -15,9 +16,9 @@ export const CustomTabBar = ({state, descriptors, navigation}) => {
           ? 'cyan.500'
           : useColorModeValue('coolGray.200', 'gray.400');
         const {options} = descriptors[route.key];
-        const label =
+        const label: String =
           options.tabBarLabel !== undefined
-            ? options.tabBarLabel
+            ? (options.tabBarLabel as String)
             : options.title !== undefined
             ? options.title
             : route.name;
@@ -30,7 +31,7 @@ export const CustomTabBar = ({state, descriptors, navigation}) => {
           });
 
           if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate({name: route.name, merge: true});
+            navigation.navigate(route.name, {merge: true});
           }
         };
 
@@ -47,8 +48,7 @@ export const CustomTabBar = ({state, descriptors, navigation}) => {
             borderColor={borderColor}
             flex={1}
             alignItems="center"
-            p="3"
-            cursor="pointer">
+            p="3">
             <Pressable onPress={onPress} onLongPress={onLongPress}>
               <Animated.Text
                 style={{

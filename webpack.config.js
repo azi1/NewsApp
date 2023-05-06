@@ -43,6 +43,13 @@ const imageLoaderConfiguration = {
     },
   },
 };
+const tsLoader = {
+  test: /\.tsx?$/,
+  exclude: /node_modules/,
+  use: {
+    loader: 'ts-loader',
+  },
+};
 
 module.exports = {
   entry: ['@babel/polyfill', path.join(__dirname, 'src/index.web.js')],
@@ -62,6 +69,7 @@ module.exports = {
       babelLoaderConfiguration,
       imageLoaderConfiguration,
       iconLoaderConfiguration,
+      tsLoader,
     ],
   },
   plugins: [
