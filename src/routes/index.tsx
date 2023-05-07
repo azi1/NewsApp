@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from 'react';
 import {
   NavigationContainer,
@@ -17,11 +18,14 @@ import {
   HomeStackParamsList,
   MainStackParamList,
 } from '../types/navigation';
+import {withErrorHandling} from '../hocs';
 
 const homStackOptions: StackNavigationOptions = {
   headerShown: true,
+  cardStyle: {flex: 1},
+  presentation: 'card',
 };
-
+const HomeWithErrorHandling = withErrorHandling(Home);
 const TabStackOptions: BottomTabNavigationOptions = {
   headerShown: false,
 };
@@ -59,7 +63,7 @@ const HomeStack = () => {
             header: () => renderHomeScreenHeader('Dubbizle News'),
           };
         }}
-        component={Home}
+        component={HomeWithErrorHandling}
       />
       <Stack.Screen
         name="Details"

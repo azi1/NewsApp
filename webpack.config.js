@@ -6,6 +6,7 @@ const appDirectory = path.resolve(__dirname);
 const {presets, plugins} = require(`${appDirectory}/babel.config.js`);
 const compileNodeModules = [
   // Add every react-native package that needs compiling
+  'react-native-webview',
   'react-native-vector-icons',
 ].map(moduleName => path.resolve(appDirectory, `node_modules/${moduleName}`));
 const babelLoaderConfiguration = {
@@ -48,6 +49,18 @@ const tsLoader = {
   exclude: /node_modules/,
   use: {
     loader: 'ts-loader',
+    options: {
+      ignoreDiagnostics: [2322],
+    },
+  },
+};
+const webViewsLoader = {
+  test: /postMock.html$/,
+  use: {
+    loader: 'file-loader',
+    options: {
+      name: '[name].[ext]',
+    },
   },
 };
 
@@ -70,6 +83,7 @@ module.exports = {
       imageLoaderConfiguration,
       iconLoaderConfiguration,
       tsLoader,
+      webViewsLoader,
     ],
   },
   plugins: [
