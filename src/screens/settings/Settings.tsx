@@ -1,6 +1,14 @@
 import React, {useCallback} from 'react';
 import {I18nManager} from 'react-native';
-import {Box, VStack, Divider, Switch, HStack, Text} from 'native-base';
+import {
+  Box,
+  VStack,
+  Divider,
+  Switch,
+  HStack,
+  Text,
+  useColorMode,
+} from 'native-base';
 import {useTranslation} from 'react-i18next';
 import {newsSlice} from '../../redux/slices/news';
 import {useDispatch, useSelector} from '../../redux/store';
@@ -10,6 +18,11 @@ import RNRestart from 'react-native-restart';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Settings = () => {
+  const {colorMode, toggleColorMode} = useColorMode();
+  const isDarkMode = colorMode === 'dark';
+  const toggleSwitch = () => {
+    toggleColorMode();
+  };
   const {t, i18n} = useTranslation('translation');
   const {setSelectedLanguage} = newsSlice.actions;
   const selectedLanguage = useSelector(getSelectedLanguage);
@@ -57,7 +70,7 @@ export const Settings = () => {
             alignItems="center"
             justifyContent="space-between">
             <Text>{t('APP.THEME_SWITCH_OPTION')}</Text>
-            <Switch size="md" />
+            <Switch size="md" value={isDarkMode} onValueChange={toggleSwitch} />
           </HStack>
         </Box>
       </VStack>

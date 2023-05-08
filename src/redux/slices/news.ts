@@ -12,7 +12,7 @@ export const getHeadlineNews = createAsyncThunk(
         {
           method: 'GET',
           headers: {
-            'X-Api-Key': 'd5d00b9ccc4d4021bf144b6fd414799f',
+            'X-Api-Key': '7794df4c030f42ebad5a42ea5819b4b8',
           },
         },
       );
@@ -36,7 +36,7 @@ export const getTopicNews = createAsyncThunk(
         {
           method: 'GET',
           headers: {
-            'X-Api-Key': 'd5d00b9ccc4d4021bf144b6fd414799f',
+            'X-Api-Key': '7794df4c030f42ebad5a42ea5819b4b8',
           },
         },
       );

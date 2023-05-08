@@ -8,7 +8,11 @@ type Props = {
 export const NoDataFound = ({text}: Props) => {
   return (
     <Center p="20" m="10" bg="coolGray.100" flex={1}>
-      <Text textAlign="center" fontSize="md">
+      <Text
+        _light={{color: 'black'}}
+        _dark={{color: 'black'}}
+        textAlign="center"
+        fontSize="md">
         {text}
       </Text>
     </Center>
