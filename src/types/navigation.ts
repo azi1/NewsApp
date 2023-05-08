@@ -6,13 +6,8 @@ import {
   NavigationHelpers,
 } from '@react-navigation/native';
 
-export type HomeStackParamsList = {
-  Home: {};
-  Details: {};
-};
-
 export type MainStackParamList = {
-  main: HomeStackParamsList;
+  Home: {};
   settings: {};
 };
 

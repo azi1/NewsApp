@@ -2,7 +2,7 @@ import React, {FC, useCallback, useEffect, useState} from 'react';
 import {Box, Heading, FlatList, ScrollView, HStack} from 'native-base';
 import {useTranslation} from 'react-i18next';
 import type {StackScreenProps} from '@react-navigation/stack';
-import {HomeStackParamsList} from '../../types/navigation';
+import {MainStackParamList} from '../../types/navigation';
 import {getHeadlineNews, getTopicNews} from '../../redux/slices/news';
 import {useSelector, useDispatch} from '../../redux/store';
 import {
@@ -23,7 +23,7 @@ import {
 } from '../../components';
 import {ARABIC, cardWithImageLoaderCount, topics} from '../../constants';
 
-type Props = StackScreenProps<HomeStackParamsList, 'Home'>;
+type Props = StackScreenProps<MainStackParamList, 'Home'>;
 
 export const Home: FC<Props> = () => {
   const {t} = useTranslation('translation');
