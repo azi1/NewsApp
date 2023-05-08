@@ -2,14 +2,18 @@
 
 News App based on react native. For web support react-native-web is used.
 
-# Setup
+# Setup. 
 
-Run yarn or npm install
+Clone repo
 
-# Run Project
+Run yarn or npm install from project root
 
-IOS: npm run ios
-Android: npm run android
+# Run Project. 
+
+IOS: npm run ios. 
+
+Android: npm run android. 
+
 Web: npm run web 
 
 
@@ -21,6 +25,3 @@ Api's from newsapi.org not working in production mode on developer plan.
 # vercel app link 
 
 https://news-app-one-khaki.vercel.app/
-
-
-
