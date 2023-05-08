@@ -1,6 +1,17 @@
 //@ts-nocheck
-
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {NewsState} from '../../types/newsSlice';
+import moment from 'moment';
+
+const initialState: NewsState = {
+  headlineNews: [],
+  loading: false,
+  isError: false,
+  isTopicLoading: false,
+  isTopicError: false,
+  topicNews: [],
+  selectedLangauge: 'en',
+};
 
 export const getHeadlineNews = createAsyncThunk(
   'news/getHeadlines',
@@ -30,9 +41,13 @@ export const getTopicNews = createAsyncThunk(
   'news/getTopicNews',
   async (searchValue, {getState}) => {
     const {selectedLangauge} = getState().news;
+    // Below is the error msg from api in case of 90 days
+    // You are trying to request results too far in the past. Your plan permits you to request articles as far back as 2023-04-07, but you have requested 2023-02-08. You may need to upgrade to a paid plan
+    let fromDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
+    let toDate = moment().format('YYYY-MM-DD');
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=${searchValue}&language=${selectedLangauge}`,
+        `https://newsapi.org/v2/everything?q=${searchValue}&language=${selectedLangauge}&from=${fromDate}&to${toDate}&sortBy=publishedAt`,
         {
           method: 'GET',
           headers: {
@@ -53,15 +68,7 @@ export const getTopicNews = createAsyncThunk(
 
 export const newsSlice = createSlice({
   name: 'news',
-  initialState: {
-    headlineNews: [],
-    loading: false,
-    isError: false,
-    isTopicLoading: false,
-    isTopicError: false,
-    topicNews: [],
-    selectedLangauge: 'en',
-  },
+  initialState,
   reducers: {
     resetState(state) {
       state.loading = false;

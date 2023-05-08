@@ -17,6 +17,8 @@
             "NETFLIX": "نيتفليكس"
         },
         "HOME_TAB": "بيت",
-        "SETTINGS_TAB": "إعدادات"
+        "SETTINGS_TAB": "إعدادات",
+        "CARD_DESCRIPTION_PLACEHOLDER": "لا يوجد وصف متاح"
+
     }
 }

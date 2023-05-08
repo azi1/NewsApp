@@ -11,6 +11,7 @@ import {
   Pressable,
 } from 'native-base';
 import {useWindowDimensions} from 'react-native';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   item: {
@@ -27,6 +28,7 @@ type Props = {
 };
 
 export const CardWithImage = ({item, index, onPress}: Props) => {
+  const {t} = useTranslation('translation');
   const {width} = useWindowDimensions();
   const [isSmallScreen] = useMediaQuery({
     minWidth: 280,
@@ -54,7 +56,12 @@ export const CardWithImage = ({item, index, onPress}: Props) => {
         }}>
         <Box>
           <AspectRatio w="100%" ratio={16 / 9}>
-            <Image src={item.urlToImage} alt="image" />
+            <Image
+              src={item.urlToImage}
+              resizeMethod="auto"
+              resizeMode="stretch"
+              alt="image"
+            />
           </AspectRatio>
           <Center
             bg="violet.500"
@@ -75,7 +82,7 @@ export const CardWithImage = ({item, index, onPress}: Props) => {
         </Box>
         <Stack p="4" space={3}>
           <Stack space={2}>
-            <Heading size="md" ml="-1">
+            <Heading isTruncated noOfLines={2} size="md" ml="-1">
               {item.title}
             </Heading>
             <Text
@@ -89,11 +96,11 @@ export const CardWithImage = ({item, index, onPress}: Props) => {
               fontWeight="500"
               ml="-0.5"
               mt="-1">
-              {item.author}
+              {item.author || 'NA'}
             </Text>
           </Stack>
           <Text isTruncated fontWeight="400">
-            {item.description}
+            {item.description || t('APP.CARD_DESCRIPTION_PLACEHOLDER')}
           </Text>
         </Stack>
       </Box>

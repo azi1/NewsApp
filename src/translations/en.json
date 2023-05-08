@@ -17,6 +17,7 @@
             "NETFLIX": "Netflix"
         },
         "HOME_TAB": "Home",
-        "SETTINGS_TAB": "Settings"
+        "SETTINGS_TAB": "Settings",
+        "CARD_DESCRIPTION_PLACEHOLDER": "No Description available"
     }
 }
