@@ -19,6 +19,7 @@ import {
   MainStackParamList,
 } from '../types/navigation';
 import {withErrorHandling} from '../hocs';
+import {useTranslation} from 'react-i18next';
 
 const homStackOptions: StackNavigationOptions = {
   headerShown: true,
@@ -42,6 +43,7 @@ const navTheme = {
 
 const HomeStack = () => {
   const renderHomeScreenHeader = (title: string) => <Header title={title} />;
+  const {t} = useTranslation('translation');
 
   const renderDetailsScreenHeader = (
     route: RouteProp<any>,
@@ -60,7 +62,7 @@ const HomeStack = () => {
         name="Home"
         options={() => {
           return {
-            header: () => renderHomeScreenHeader('Dubbizle News'),
+            header: () => renderHomeScreenHeader(t('APP.TITLE')),
           };
         }}
         component={HomeWithErrorHandling}
@@ -79,6 +81,7 @@ const HomeStack = () => {
 };
 
 const AppRoutes = () => {
+  const {t} = useTranslation('translation');
   const renderTabBar = (props: JSX.IntrinsicAttributes & CutomTabBarProps) => (
     <CustomTabBar {...props} />
   );
@@ -89,12 +92,12 @@ const AppRoutes = () => {
         tabBar={renderTabBar}
         screenOptions={TabStackOptions}>
         <Tab.Screen
-          options={{tabBarLabel: 'Home'}}
+          options={{tabBarLabel: t('APP.HOME_TAB')}}
           name="main"
           component={HomeStack}
         />
         <Tab.Screen
-          options={{tabBarLabel: 'Settings'}}
+          options={{tabBarLabel: t('APP.SETTINGS_TAB')}}
           name="settings"
           component={Settings}
         />

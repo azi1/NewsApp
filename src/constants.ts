@@ -4,27 +4,30 @@ export const isWeb = Platform.OS === 'web';
 export const cardWithImageLoaderCount = [1, 2, 3, 4];
 export const topics = [
   {
-    title: 'Bitcoin',
+    title: 'APP.CHIPS.BITCOIN',
     value: 'bitcoin',
   },
   {
-    title: 'Apple',
+    title: 'APP.CHIPS.APPLE',
     value: 'apple',
   },
   {
-    title: 'Netflix',
+    title: 'APP.CHIPS.NETFLIX',
     value: 'netflix',
   },
   {
-    title: 'Google',
+    title: 'APP.CHIPS.GOOGLE',
     value: 'google',
   },
   {
-    title: 'Twitter',
+    title: 'APP.CHIPS.TWITTER',
     value: 'twitter',
   },
   {
-    title: 'Tesla',
+    title: 'APP.CHIPS.TESLA',
     value: 'tesla',
   },
 ];
+
+export const ARABIC = 'ar';
+export const ENGLISH = 'en';

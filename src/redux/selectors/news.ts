@@ -4,3 +4,4 @@ export const getIsError = (state: any) => state.news.isError;
 export const getTopics = (state: any) => state.news.topicNews;
 export const getIsTopicLoading = (state: any) => state.news.isTopicLoading;
 export const getIsTopicError = (state: any) => state.news.isTopicError;
+export const getSelectedLanguage = (state: any) => state.news.selectedLangauge;

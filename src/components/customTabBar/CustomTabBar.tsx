@@ -1,12 +1,20 @@
-import {Box, Pressable, useColorModeValue} from 'native-base';
+import {HStack, Box, Pressable, useColorModeValue} from 'native-base';
 import React, {FC} from 'react';
 import {Animated} from 'react-native';
 import {CutomTabBarProps} from '../../types/navigation';
+import {useSelector} from '../../redux/store';
+import {getSelectedLanguage} from '../../redux/selectors/news';
+import {ARABIC} from '../../constants';
 
 type Props = CutomTabBarProps;
 export const CustomTabBar: FC<Props> = ({state, descriptors, navigation}) => {
+  const selectedLanguage = useSelector(getSelectedLanguage);
   return (
-    <Box flexDirection="row">
+    <HStack
+      w="100%"
+      _web={{
+        flexDirection: selectedLanguage === ARABIC ? 'row-reverse' : 'row',
+      }}>
       {state.routes.map((route, index) => {
         const isFocused = state.index === index;
         const color = isFocused
@@ -60,6 +68,6 @@ export const CustomTabBar: FC<Props> = ({state, descriptors, navigation}) => {
           </Box>
         );
       })}
-    </Box>
+    </HStack>
   );
 };

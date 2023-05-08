@@ -1,13 +1,6 @@
 import React, {FC, useCallback, useEffect, useState} from 'react';
-import {
-  Box,
-  Heading,
-  FlatList,
-  ScrollView,
-  HStack,
-  Text,
-  Center,
-} from 'native-base';
+import {Box, Heading, FlatList, ScrollView, HStack} from 'native-base';
+import {useTranslation} from 'react-i18next';
 import type {StackScreenProps} from '@react-navigation/stack';
 import {HomeStackParamsList} from '../../types/navigation';
 import {getHeadlineNews, getTopicNews} from '../../redux/slices/news';
@@ -18,24 +11,31 @@ import {
   getIsTopicLoading,
   getTopics,
   getIsTopicError,
+  getSelectedLanguage,
+  getIsError,
 } from '../../redux/selectors/news';
 import {
   CardWithImage,
   WebViewModal,
   CardWithImageLoader,
   Chip,
+  NoDataFound,
 } from '../../components';
-import {cardWithImageLoaderCount, topics} from '../../constants';
+import {ARABIC, cardWithImageLoaderCount, topics} from '../../constants';
 
 type Props = StackScreenProps<HomeStackParamsList, 'Home'>;
 
 export const Home: FC<Props> = () => {
+  const {t} = useTranslation('translation');
   const dispatch = useDispatch();
   const headLines = useSelector(getHeadlines);
   const isLoading = useSelector(getIsLoading);
   const selectedTopicResult = useSelector(getTopics);
   const selectedTopicLoading = useSelector(getIsTopicLoading);
   const selectedTopicError = useSelector(getIsTopicError);
+  const isTopHeadlineError = useSelector(getIsError);
+
+  const selectedLanguage = useSelector(getSelectedLanguage);
 
   const [selectedArticle, setSelectedArticle] = useState<any>({});
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -45,7 +45,7 @@ export const Home: FC<Props> = () => {
     dispatch(getHeadlineNews());
     //@ts-ignore
     dispatch(getTopicNews('bitcoin'));
-  }, []);
+  }, [selectedLanguage]);
 
   const onSelectedItem = useCallback((item: any) => {
     setSelectedArticle(item);
@@ -73,23 +73,27 @@ export const Home: FC<Props> = () => {
 
   return (
     <ScrollView>
-      <Heading size="xl" fontWeight="200" padding={5}>
-        Hot Topics
+      <Heading
+        _ios={{
+          textAlign: 'left',
+        }}
+        size="xl"
+        fontWeight="200"
+        padding={5}>
+        {t('APP.HEADER1')}
       </Heading>
-      <Box width="100%">
-        <Box>
-          <HStack flexWrap="wrap">
-            {topics.map((topic, index) => (
-              <Chip
-                key={index}
-                isSelected={topic.value === selectedTopic}
-                onPress={onSelect}
-                item={topic}
-              />
-            ))}
-          </HStack>
-        </Box>
-      </Box>
+
+      <HStack mt="10" mb="10" justifyContent="center" flexWrap="wrap">
+        {topics.map((topic, index) => (
+          <Chip
+            key={index}
+            isSelected={topic.value === selectedTopic}
+            onPress={onSelect}
+            item={topic}
+          />
+        ))}
+      </HStack>
+
       <Box>
         {selectedTopicLoading ? (
           <HStack w="100%">
@@ -98,11 +102,7 @@ export const Home: FC<Props> = () => {
             })}
           </HStack>
         ) : selectedTopicError ? (
-          <Center p="20" m="10" bg="coolGray.100" flex={1}>
-            <Text textAlign="center" fontSize="md">
-              No data found, please try again.
-            </Text>
-          </Center>
+          <NoDataFound text={t('APP.ERROR_MSG1')} />
         ) : (
           <FlatList
             data={selectedTopicResult}
@@ -111,8 +111,14 @@ export const Home: FC<Props> = () => {
           />
         )}
       </Box>
-      <Heading size="xl" fontWeight="200" padding={5}>
-        Top Headlines
+      <Heading
+        _ios={{
+          textAlign: 'left',
+        }}
+        size="xl"
+        fontWeight="200"
+        padding={5}>
+        {t('APP.HEADER2')}
       </Heading>
       <Box>
         {isLoading ? (
@@ -121,6 +127,8 @@ export const Home: FC<Props> = () => {
               return <CardWithImageLoader />;
             })}
           </HStack>
+        ) : isTopHeadlineError ? (
+          <NoDataFound text={t('APP.ERROR_MSG1')} />
         ) : (
           <FlatList data={headLines} renderItem={renderItem} horizontal />
         )}
@@ -130,6 +138,7 @@ export const Home: FC<Props> = () => {
             title={selectedArticle?.title}
             onClose={onCloseModal}
             url={selectedArticle?.url}
+            isRTL={selectedLanguage === ARABIC}
           />
         )}
       </Box>

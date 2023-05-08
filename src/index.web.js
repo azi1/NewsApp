@@ -6,6 +6,7 @@ import {AppRegistry} from 'react-native';
 import App from './App';
 import appName from './app.json';
 import iconFont from 'react-native-vector-icons/Fonts/Feather.ttf';
+import './translations/i18n.config';
 const iconFontStyles = `@font-face {
   src: url(${iconFont});
   font-family: Feather;

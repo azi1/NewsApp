@@ -1,0 +1,22 @@
+{
+    "APP": {
+        "TITLE":"Dubbizle",
+        "LANGUAGE_SWITCH_OPTION": "English | Arabic",
+        "THEME_SWITCH_OPTION": "Light | Dark",
+        "HEADER1": "Hot Topics",
+        "HEADER2": "Top Headlines",
+        "ERROR_MSG1": "No data found, please try again.",
+        "ERROR_MSG2": "Oops, something went wrong please try again.",
+        "RETRY_BTN": "Retry",
+        "CHIPS": {
+            "BITCOIN": "Bitcoin",
+            "APPLE": "Apple",
+            "TESLA": "Tesla",
+            "GOOGLE": "Google",
+            "TWITTER": "Twitter",
+            "NETFLIX": "Netflix"
+        },
+        "HOME_TAB": "Home",
+        "SETTINGS_TAB": "Settings"
+    }
+}

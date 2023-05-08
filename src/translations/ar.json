@@ -1,0 +1,22 @@
+{
+    "APP": {  
+        "TITLE":"دوبيزل",
+        "LANGUAGE_SWITCH_OPTION": " إنجليزي | عربي",
+        "THEME_SWITCH_OPTION": "ضوء | مظلم",
+        "HEADER1": "مواضيع مثيرة",
+        "HEADER2": "أهم العناوين",
+        "ERROR_MSG1": "لا توجد بيانات ، يرجى المحاولة مرة أخرى.",
+        "ERROR_MSG2": "عفوا. حدث خطأ. حاول مرة اخرى.",
+        "RETRY_BTN": "أعد المحاولة",
+        "CHIPS": {
+            "BITCOIN": "بيتكوين",
+            "APPLE": "تفاحة",
+            "TESLA": "تسلا",
+            "GOOGLE": "جوجل",
+            "TWITTER": "تويتر",
+            "NETFLIX": "نيتفليكس"
+        },
+        "HOME_TAB": "بيت",
+        "SETTINGS_TAB": "إعدادات"
+    }
+}

@@ -3,11 +3,14 @@ import React from 'react';
 import {RouteProp} from '@react-navigation/native';
 import {useDispatch} from '../../redux/store';
 import {getHeadlineNews} from '../../redux/slices/news';
+import {useTranslation} from 'react-i18next';
+
 type Props = {
   route: RouteProp<any>;
 };
 
 export const ErrorMessage = ({route}: Props) => {
+  const {t} = useTranslation('translation');
   const dispatch = useDispatch();
   const onPress = () => {
     if (route.name === 'Home') {
@@ -23,10 +26,10 @@ export const ErrorMessage = ({route}: Props) => {
         margin={10}
       />
       <Text textAlign="center" fontSize="md">
-        Oops, something went wrong please try again.
+        {t('APP.ERROR_MSG2')}
       </Text>
       <Button variant="outline" width="30%" margin={10} onPress={onPress}>
-        Retry
+        {t('APP.RETRY_BTN')}
       </Button>
     </Center>
   );

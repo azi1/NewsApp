@@ -1,5 +1,6 @@
 import {Pressable, Center} from 'native-base';
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   isSelected: Boolean;
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export const Chip = ({isSelected, onPress, item}: Props) => {
+  const {t} = useTranslation('translation');
   const onSelect = () => {
     onPress(item);
   };
@@ -37,7 +39,7 @@ export const Chip = ({isSelected, onPress, item}: Props) => {
               padding: '2',
               color: isSelected ? 'white' : 'black',
             }}>
-            {item.title}
+            {t(item.title)}
           </Center>
         );
       }}

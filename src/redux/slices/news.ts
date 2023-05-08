@@ -4,14 +4,15 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 export const getHeadlineNews = createAsyncThunk(
   'news/getHeadlines',
-  async () => {
+  async (props, {getState}) => {
+    const {selectedLangauge} = getState().news;
     try {
       const response = await fetch(
-        'https://newsapi.org/v2/top-headlines?country=us',
+        `https://newsapi.org/v2/top-headlines?country=us&language=${selectedLangauge}`,
         {
           method: 'GET',
           headers: {
-            'X-Api-Key': '822447ffba844e92b40f1664cdfa4f7b',
+            'X-Api-Key': 'd5d00b9ccc4d4021bf144b6fd414799f',
           },
         },
       );
@@ -27,15 +28,15 @@ export const getHeadlineNews = createAsyncThunk(
 );
 export const getTopicNews = createAsyncThunk(
   'news/getTopicNews',
-  async searchValue => {
-    console.log(searchValue, 'searcValue');
+  async (searchValue, {getState}) => {
+    const {selectedLangauge} = getState().news;
     try {
       const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?q=${searchValue}`,
+        `https://newsapi.org/v2/everything?q=${searchValue}&language=${selectedLangauge}`,
         {
           method: 'GET',
           headers: {
-            'X-Api-Key': '822447ffba844e92b40f1664cdfa4f7b',
+            'X-Api-Key': 'd5d00b9ccc4d4021bf144b6fd414799f',
           },
         },
       );
@@ -59,12 +60,16 @@ export const newsSlice = createSlice({
     isTopicLoading: false,
     isTopicError: false,
     topicNews: [],
+    selectedLangauge: 'en',
   },
   reducers: {
     resetState(state) {
       state.loading = false;
       state.isError = false;
       state.headlineNews = [];
+    },
+    setSelectedLanguage(state, action) {
+      state.selectedLangauge = action.payload;
     },
   },
   extraReducers: {
@@ -75,6 +80,9 @@ export const newsSlice = createSlice({
     [getHeadlineNews.fulfilled]: (state, {payload}) => {
       state.loading = false;
       state.headlineNews = payload.articles;
+      if (payload.articles.length === 0) {
+        state.isError = true;
+      }
     },
     [getHeadlineNews.rejected]: state => {
       state.loading = false;
