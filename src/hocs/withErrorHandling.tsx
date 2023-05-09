@@ -1,4 +1,3 @@
-//@ts-nocheck
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {getIsError, getIsTopicError} from '../redux/selectors/news';
@@ -16,7 +15,7 @@ export const withErrorHandling =
     const isTopicError = useSelector(getIsTopicError);
 
     return isError && isTopicError ? (
-      <ErrorMessage route={props.route} />
+      <ErrorMessage />
     ) : (
       <Component {...props}>{children}</Component>
     );

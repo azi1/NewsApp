@@ -1,21 +1,15 @@
 import {Button, Center, Image, Text} from 'native-base';
 import React from 'react';
-import {RouteProp} from '@react-navigation/native';
 import {useDispatch} from '../../redux/store';
-import {getHeadlineNews} from '../../redux/slices/news';
+import {getHeadlineNews, getTopicNews} from '../../redux/slices/news';
 import {useTranslation} from 'react-i18next';
 
-type Props = {
-  route: RouteProp<any>;
-};
-
-export const ErrorMessage = ({route}: Props) => {
+export const ErrorMessage = () => {
   const {t} = useTranslation('translation');
   const dispatch = useDispatch();
   const onPress = () => {
-    if (route.name === 'Home') {
-      dispatch(getHeadlineNews());
-    }
+    dispatch(getHeadlineNews());
+    dispatch(getTopicNews());
   };
   return (
     <Center flex={1}>
